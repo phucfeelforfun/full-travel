@@ -71,7 +71,11 @@
                     <li class="col-3 w-auto"><a href="#">Things To Do</a></li>
                     <li class="col-1 pe-3 w-auto"><a href="#">Tour</a></li>
                     <li class="col-2"><a href="#">Blog</a></li>
-                    <li class="col-2"><a href="#" style="color: red;" onclick="countdown()">Event</a></li>
+                    <li class="col-2"><a class="position-relative" href="#" onclick="showCount()">Event<span
+                                class="position-absolute top-0 start-100 translate-middle  bg-danger border-0  rounded-circle">
+
+                            </span></a></li>
+
 
                 </ul>
                 <div class="menus col-lg-4 col-sm-6 col-9 p-0">
@@ -1582,7 +1586,7 @@ font-weight: 500; ">
 font-size: 16px;
 font-style: normal;
 font-weight: 500;">Check in</label>
-                            <input type="text" class="text-checkin form-control" id="inputEmail4"
+                            <input type="date" class="start-date text-checkin form-control" id="inputEmail4"
                                 placeholder="Start Date">
                         </div>
                         <div class="col-md-6 " style="font-family: Inter;
@@ -1593,7 +1597,7 @@ font-weight: 500;">
 font-size: 16px;
 font-style: normal;
 font-weight: 500;">Check out</label>
-                            <input type="text" class="text-checkout form-control" id="inputPassword4"
+                            <input type="date" class="end-date text-checkout form-control" id="inputPassword4"
                                 placeholder="End Date">
                         </div>
                     </form>
@@ -1622,21 +1626,14 @@ color: #fff;">Create Trip</button>
                     <h1 class="mb-4" style="font-family: Inter;font-size: 40px;font-style: normal;font-weight: 700;">
                         Information Trip</h1>
                     <div class="col-12 mb-4">
-                        <label for="validationDefault01" class="form-label">location</label>
-                        <input type="text " class="info-location form-control" id="validationDefault01" value=""
-                            required>
+                        <h1 for="validationDefault01" class="form-label trip-location"></h1>
+                        
                     </div>
                     <div class="col-6 mb-4">
-                        <label for="validationDefault01" class="form-label">First date</label>
-                        <input type="text" class="info-firtD form-control" id="validationDefault01" value="" required>
-                    </div>
-                    <div class="col-6 mb-4">
-                        <label for="validationDefault01" class="form-label">Last Date</label>
-                        <input type="text" class="info-lastD form-control" id="validationDefault01" value="" required>
+                        <h1 for="validationDefault01" class="form-label trip-date">Date in </h1>
                     </div>
                     <div class="col-12">
-                        <label for="validationDefault01" class="form-label">passengers</label>
-                        <input type="text" class="info-pass form-control" id="validationDefault01" value="" required>
+                        <h1 for="validationDefault01" class="form-label trip-passen">passengers: </h1>
                     </div>
                 </div>
             </div>
@@ -1651,28 +1648,57 @@ color: #fff;">Create Trip</button>
 
         </div>
     </div>
-    <div class="coundown d-flex justify-content-center">
-        <div class="coundown-content row w-75 ">
-            <h1 class="col-3 m-auto">countdown Clock</h1>
-            <div class="d-flex  row align-items-center justify-content-center mt-4">
-                <div class="col-2 rounded p-2 m-1 d-flex  flex-column align-items-center bg-primary ">
-                    <input type="text" class="form-control border-0 " >
+    <div class="coundown ">
+        
+        <div class="coundown-content p-3 ">
+            <i class="btn-close ms-auto" onclick="hide()"></i>
+            <h1 class="">countdown Clock</h1>
+
+            <div class="time-input row">
+                <h1 class="col-3 p-0 text-start">Input date: </h1>
+                <input type="datetime-local" class="form-control w-75 input-date">
+
+            </div>
+            <form class="was-validated w-100">
+                <div class="form-check mt-4 mb-3 w-100">
+                    <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
+                    <label class="form-check-label" for="validationFormCheck1 text-black">Not Add Date</label>
+                    <div class="invalid-feedback row m-0 ">
+                        <h1 class="col-4 p-0 m-0 my-3 text-start text-black">Input date: </h1>
+                        <div class="col-8">
+                            <input type="datetime-local" class="form-control col-7 input-date-second w-100 border border-dark" required=" ">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="time-input row mt-4">
+
+
+            </div>
+
+
+
+            <button type="button" class="btn btn-dark w-25 my-4" onclick="showDate()">Run</button>
+            <div class="run">
+                <div class="time">
+                    <input type="text" class="form-control  ">
                     <h1>Days</h1>
                 </div>
-                <div class="col-2 rounded p-2 m-1 d-flex  flex-column align-items-center bg-primary ">
-                    <input type="text" class="form-control border-0 " >
+                <div class="time ">
+                    <input type="text" class="form-control  ">
                     <h1>Hours</h1>
                 </div>
-                <div class="col-2 rounded p-2 m-1 d-flex  flex-column align-items-center bg-primary ">
-                    <input type="text" class="form-control border-0 " >
+                <div class="time ">
+                    <input type="text" class="form-control  ">
                     <h1>Minutes</h1>
                 </div>
-                <div class="col-2 rounded p-2 m-1 d-flex  flex-column align-items-center bg-primary ">
-                    <input type="text" class="form-control border-0 " >
+                <div class=" time">
+                    <input type="text" class="form-control  ">
                     <h1>Seconds</h1>
                 </div>
-                
+
             </div>
+            <div class="my-4 timeout"></div>
         </div>
 
 

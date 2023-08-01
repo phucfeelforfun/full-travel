@@ -9,9 +9,11 @@ body {
     color: #000000;
 
 }
-.container-fluid{
-    padding:0;
+
+.container-fluid {
+    padding: 0;
 }
+
 .container2 {
 
     max-width: 100%;
@@ -201,16 +203,19 @@ a {
 
     color: #353945;
 }
-.cover-card-second{
+
+.cover-card-second {
     margin-right: -24px;
     padding-right: 24px;
-    padding-bottom:10px;
+    padding-bottom: 10px;
     width: 100%;
 }
+
 .card-second {
-    width:876px;
-    
+    width: 876px;
+
 }
+
 .card-second-mini p {
     color: var(--gray-2, #353945);
     text-align: center;
@@ -1370,47 +1375,141 @@ a {
 .nine-footer svg {
     margin: 0 11px 0 0;
 }
-.mycontainer-one{
+
+.mycontainer-one {
     max-width: 1440px;
     margin: 0 auto;
-    
+
 }
-.mycontainer{
+
+.mycontainer {
     max-width: 1440px;
-    padding-left:8.7%;
+    padding-left: 8.7%;
     margin: auto;
 }
+
 .login {
     position: fixed;
     background: rgba(0, 0, 0, 0.5);
-    height:100vh;
+    height: 100vh;
     overflow-y: scroll;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 100%;
     opacity: 0;
     pointer-events: none;
     transition: 0.25s ease-in-out;
-    
-} 
-.show{
- opacity: 1;
- pointer-events: all;
+
 }
-.login-content{
+
+
+.login-content {
     max-width: 75%;
     border-radius: 10px;
     background-color: #ffffff;
-    left:50%;
-    transform:translateX(-50%);
+    left: 50%;
+    transform: translateX(-50%);
     position: relative;
-    top:0;
-    
+    top: 0;
+
     transition: 0.25s ease-in-out;
 }
-.show .login-content{
-    top:100px;
+
+.show .login-content {
+    top: 100px;
 }
-.show img{
-    border-radius:0 10px 10px 0;
+
+.show img {
+    border-radius: 0 10px 10px 0;
+}
+
+.coundown {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    overflow-y: scroll;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.25s ease-in-out;
+}
+
+.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.coundown-content {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 50%;
+    border-radius: 10px;
+    background-color: #ffffff;
+    left: 25%;
+    transform: translateX(-50%);
+    position: relative;
+    top: 50px;
+    height: fit-content;
+    transition: 0.25s ease-in-out;
+}
+
+.show .coundown-content {
+    top: 50px;
+}
+
+.coundown-content h1 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.run {
+    display: flex;
+    justify-content: space-between;
+}
+
+.coundown-time {
+    display: flex;
+    justify-content: space-between;
+}
+
+.time-input {
+    display: flex;
+    width: 100%;
+}
+
+.time {
+    background-color: #9a9ca3;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.time input {
+    width: 50%;
+    border: 1px solid rgb(26, 26, 26);
+    color: #000;
+}
+
+.position-absolute {
+    padding: 6px;
+}
+
+.was-validated h1 {
+    font-size: 16px;
+
+}
+
+.timeout {
+    font-size: 24px;
 }
