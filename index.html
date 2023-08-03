@@ -1627,7 +1627,7 @@ color: #fff;">Create Trip</button>
                         Information Trip</h1>
                     <div class="col-12 mb-4">
                         <h1 for="validationDefault01" class="form-label trip-location"></h1>
-                        
+
                     </div>
                     <div class="col-6 mb-4">
                         <h1 for="validationDefault01" class="form-label trip-date">Date in </h1>
@@ -1649,27 +1649,29 @@ color: #fff;">Create Trip</button>
         </div>
     </div>
     <div class="coundown ">
-        
+
         <div class="coundown-content p-3 ">
             <i class="btn-close ms-auto" onclick="hide()"></i>
             <h1 class="">countdown Clock</h1>
 
             <div class="time-input row">
                 <h1 class="col-3 p-0 text-start">Input date: </h1>
-                <input type="datetime-local" class="form-control w-75 input-date">
+                <input type="datetime-local" class="form-control w-75 input-date" onchange="getDate()">
 
             </div>
-            <form class="was-validated w-100">
-                <div class="form-check mt-4 mb-3 w-100">
-                    <input type="checkbox" class="form-check-input border border-dark" id="validationFormCheck1" required>
-                    <label class="form-check-label text-black " for="validationFormCheck1 ">Not Add Date</label>
-                    <div class="invalid-feedback row m-0 ">
-                        <h1 class="col-4 p-0 m-0 my-3 text-start text-black">Input date: </h1>
-                        <div class="col-8">
-                            <input type="datetime-local" class="form-control col-7 input-date-second w-100 border border-dark" required=" ">
-                        </div>
-                    </div>
+            <form class=" w-100">
+                <div class="form-check mt-4 mb-3 w-100 d-flex align-items-end">
+                    <input onclick="Check()" type="checkbox" class="form-check-input border border-dark me-2 check-add"  id="validationFormCheck1">
+                    <label class="form-check-label text-black text-center" for="validationFormCheck1 ">Add Date</label>
                 </div>
+                <div class=" row m-0 add-time">
+                    <h1 class="col-3 p-0 m-0 my-3 text-start text-black">Input date: </h1>
+
+                    <input onchange="getDate2()" type="datetime-local"
+                        class=" form-control col-8 input-date-second w-75 " required=" ">
+
+                </div>
+
             </form>
             <div class="time-input row mt-4">
 

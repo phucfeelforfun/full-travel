@@ -17,8 +17,8 @@ var countdownContent = document.querySelector('.coundown-content')
 class Trip {
     constructor(location, firstDate, lastDate, passen) {
         this.location = location;
-        this.firstDate = new Date(firstDate) ;
-        this.lastDate =new Date(lastDate);
+        this.firstDate = new Date(firstDate);
+        this.lastDate = new Date(lastDate);
         this.passen = passen;
     }
 
@@ -53,8 +53,8 @@ class Trip {
     set setPassen(pass) {
         this.passen = pass;
     }
-    date(){
-        
+    date() {
+
     }
     call() {
         return this.getLocation + " " + this.getFirstDate + " " + this.getLastDate + " " + this.getPassen;
@@ -85,10 +85,10 @@ document.onkeyup = function (evt) {
         hide();
     }
 };
-function showCount() {  
-    countdown.classList.add('show'); 
+function showCount() {
+    countdown.classList.add('show');
 }
-countdown.addEventListener('click',(e)=> {
+countdown.addEventListener('click', (e) => {
     if (!countdownContent.contains(e.target)) {
         hide();
     }
@@ -141,9 +141,9 @@ btn.addEventListener('click', (e) => {
         console.log(infoTripUser.getLocation)
         var date = infoTripUser.getLastDate.getTime() - infoTripUser.getFirstDate.getTime();
         date = Math.floor(date / (24 * 60 * 60 * 1000))
-        document.querySelector('.trip-location').innerHTML='Location: ' + `${infoTripUser.getLocation}`;
-        document.querySelector('.trip-date').innerHTML='Date in ' + `${date}` + ' days';
-        document.querySelector('.trip-passen').innerHTML='passengers: ' + `${infoTripUser.getPassen}`;
+        document.querySelector('.trip-location').innerHTML = 'Location: ' + `${infoTripUser.getLocation}`;
+        document.querySelector('.trip-date').innerHTML = 'Date in ' + `${date}` + ' days';
+        document.querySelector('.trip-passen').innerHTML = 'passengers: ' + `${infoTripUser.getPassen}`;
         // var arrayInfo = infoTripUser.array();
         // for (var i = 0; i < showInfo.length; i++) {
         //     showInfo[i].value = arrayInfo[i];
@@ -161,93 +161,79 @@ check.forEach(form => {
         form.classList.remove('is-invalid')
     })
 })
-//---countdown-------
 
+//---countdown-------
+let checkAdd = document.getElementById('validationFormCheck1')
+
+function Check() {
+    
+    if (checkAdd.checked) {
+        document.querySelector('.add-time').style.display="flex";
+    }
+    else {
+        document.querySelector('.add-time').style.display ="none";
+    }
+
+}
+let endDate
+function getDate() {
+    endDate = new Date(document.querySelector('.input-date').value).getTime()
+}
+let endDate2
+function getDate2() {
+    endDate2 = new Date(document.querySelector('.input-date-second').value).getTime()
+}
 function showDate() {
-    let endDate = new Date(document.querySelector('.input-date').value).getTime()
-    let endDate2 = new Date(document.querySelector('.input-date-second').value).getTime()
     let run = document.querySelector('.run')
     let showTime = run.querySelectorAll('input')
     let timeout = document.querySelector('.timeout')
-    timeout.innerHTML='';
+    timeout.innerHTML = '';
     let check = setInterval(function () {
-
         let timeNow = new Date().getTime();
-        let endDateFirst= Math.floor(endDate / Math.pow(10, Math.floor(Math.log10(endDate)) - 8))
-        let timeNowCal =Math.floor(timeNow / Math.pow(10, Math.floor(Math.log10(timeNow)) - 8))
+        let endDateFirst = Math.floor(endDate / Math.pow(10, Math.floor(Math.log10(endDate)) - 8))
+        let timeNowCal = Math.floor(timeNow / Math.pow(10, Math.floor(Math.log10(timeNow)) - 8))
         let endDateLast = Math.floor(endDate2 / Math.pow(10, Math.floor(Math.log10(endDate2)) - 8))
-        console.log(endDateFirst)
-        console.log(timeNowCal)
-        console.log(endDateLast)
-        if(!endDate){
+        function calTime(endDate, timeNow) {
+            let distance = endDate - timeNow;
+            let day = Math.floor(distance / (24 * 60 * 60 * 1000));
+            let hour = Math.floor((distance % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+            let minute = Math.floor((distance % (60 * 60 * 1000)) / (60 * 1000));
+            let seconds = Math.floor((distance % (60 * 1000)) / 1000);
+            let a = [day, hour, minute, seconds]
+            for (var i = 0; i < a.length; i++) {
+                showTime[i].value = a[i]
+            }
+        }
+        if (!endDate) {
             clearInterval(check);
         }
         else if (!endDate2) {
             if (endDateFirst === timeNowCal) {
-                timeout.innerHTML= 'Time Out';
+                timeout.innerHTML = 'Time Out';
                 clearInterval(check);
-
             }
             else if (endDateFirst > timeNowCal) {
-                let distance = endDate - timeNow;
-                let day = Math.floor(distance / (24 * 60 * 60 * 1000));
-                let hour = Math.floor((distance % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-                let minute = Math.floor((distance % (60 * 60 * 1000)) / (60 * 1000));
-                let seconds = Math.floor((distance % (60 * 1000)) / 1000);
-                let a = [day, hour, minute, seconds]
-                for(var i=0;i < a.length;i++){
-                    showTime[i].value = a[i]
-                }
-
+                calTime(endDate, timeNow)
             }
             else {
-                let distance = timeNow - endDate;
-                let day = Math.floor(distance / (24 * 60 * 60 * 1000));
-                let hour = Math.floor((distance % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-                let minute = Math.floor((distance % (60 * 60 * 1000)) / (60 * 1000));
-                let seconds = Math.floor((distance % (60 * 1000)) / 1000);
-                console.log(day + '/' + hour + '/' + minute + '/' + seconds)
-                let a = [day, hour, minute, seconds]
-                for(var i=0;i < a.length;i++){
-                    showTime[i].value = a[i]
-                }
+                calTime(timeNow, endDate)
             }
-        }else if(endDateFirst<endDateLast){
+        } else if (endDateFirst < endDateLast) {
             if (timeNowCal === endDateLast) {
-                timeout.innerHTML= 'Time Out';
+                timeout.innerHTML = 'Time Out';
                 clearInterval(check);
 
             }
             else if (endDateFirst > timeNowCal) {
-                let distance =endDate- timeNow ;
-                let day = Math.floor(distance / (24 * 60 * 60 * 1000));
-                let hour = Math.floor((distance % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-                let minute = Math.floor((distance % (60 * 60 * 1000)) / (60 * 1000));
-                let seconds = Math.floor((distance % (60 * 1000)) / 1000);
-                let a = [day, hour, minute, seconds]
-                for(var i=0;i < a.length;i++){
-                    showTime[i].value = a[i]
-                }
+                calTime(endDate, timeNow)
 
             }
             else {
-                let distance = endDate2-timeNow;
-                let day = Math.floor(distance / (24 * 60 * 60 * 1000));
-                let hour = Math.floor((distance % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-                let minute = Math.floor((distance % (60 * 60 * 1000)) / (60 * 1000));
-                let seconds = Math.floor((distance % (60 * 1000)) / 1000);
-                console.log(day + '/' + hour + '/' + minute + '/' + seconds)
-                let a = [day, hour, minute, seconds]
-                for(var i=0;i < a.length;i++){
-                    showTime[i].value = a[i]
-                }
+                calTime(endDate2, timeNow)
             }
-        }else {
+        } else {
             clearInterval(check);
         }
-
-
-
     }, 1000);
 }
 
