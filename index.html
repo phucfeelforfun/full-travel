@@ -1618,23 +1618,16 @@ font-size: 18px;
 font-style: normal;
 font-weight: 700;
 color: #fff;">Create Trip</button>
-
-
-
                 </div>
-                <div class="info-trip row mt-4  ">
-                    <h1 class="mb-4" style="font-family: Inter;font-size: 40px;font-style: normal;font-weight: 700;">
-                        Information Trip</h1>
-                    <div class="col-12 mb-4">
-                        <h1 for="validationDefault01" class="form-label trip-location"></h1>
-
-                    </div>
-                    <div class="col-6 mb-4">
-                        <h1 for="validationDefault01" class="form-label trip-date">Date in </h1>
-                    </div>
-                    <div class="col-12">
-                        <h1 for="validationDefault01" class="form-label trip-passen">passengers: </h1>
-                    </div>
+                <div class="btn-group mb-3" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false" onclick="renderListTrip ()">
+                        Information Trip
+                    </button>
+                    <ul class="dropdown-menu">
+                    </ul>
+                </div>
+                <div class="info-trip mt-4   row">
                 </div>
             </div>
 
@@ -1661,7 +1654,8 @@ color: #fff;">Create Trip</button>
             </div>
             <form class=" w-100">
                 <div class="form-check mt-4 mb-3 w-100 d-flex align-items-end">
-                    <input onclick="Check()" type="checkbox" class="form-check-input border border-dark me-2 check-add"  id="validationFormCheck1">
+                    <input onclick="Check()" type="checkbox" class="form-check-input border border-dark me-2 check-add"
+                        id="validationFormCheck1">
                     <label class="form-check-label text-black text-center" for="validationFormCheck1 ">Add Date</label>
                 </div>
                 <div class=" row m-0 add-time">

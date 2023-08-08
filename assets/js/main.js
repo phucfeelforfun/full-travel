@@ -14,56 +14,7 @@ var countdownContent = document.querySelector('.coundown-content')
 
 
 //------save date---
-class Trip {
-    constructor(location, firstDate, lastDate, passen) {
-        this.location = location;
-        this.firstDate = new Date(firstDate);
-        this.lastDate = new Date(lastDate);
-        this.passen = passen;
-    }
 
-    get getLocation() {
-        return this.location;
-    }
-
-    set setLocation(loca) {
-        this.location = loca;
-    }
-
-    get getFirstDate() {
-        return this.firstDate;
-    }
-
-    set setFirstDate(date) {
-        this.firstDate = date;
-    }
-
-    get getLastDate() {
-        return this.lastDate;
-    }
-
-    set setLastDate(date) {
-        this.lastDate = date;
-    }
-
-    get getPassen() {
-        return this.passen;
-    }
-
-    set setPassen(pass) {
-        this.passen = pass;
-    }
-    date() {
-
-    }
-    call() {
-        return this.getLocation + " " + this.getFirstDate + " " + this.getLastDate + " " + this.getPassen;
-    }
-    array() {
-        var a = [this.getLocation, this.getFirstDate, this.getLastDate, this.getPassen]
-        return a;
-    }
-}
 //--------------------Show PopUp-----------------
 function show() {
     login.classList.add('show');
@@ -122,37 +73,113 @@ function checkSubmit(listInput) {
     }
     return isEmty;
 }
-let infoTripUser = new Trip();
+
+
+///----handle Trip
+var courseApi = 'http://localhost:3000/trip'
 btn.addEventListener('click', (e) => {
     e.preventDefault()
 
 
     var checkLogin = checkSubmit(check)
-    console.log(checkLogin)
+    
 
     if (checkLogin) {
-        for (var i = 0; i < check.length; i++) {
-            infoRes[i] = check[i].value;
+        hadleCreateTrip()
+        // for (var i = 0; i < check.length; i++) {
+        //     infoRes[i] = check[i].value;
 
-        }
-        infoTripUser = new Trip(...infoRes)
-        console.log(infoTripUser.call())
-
-        console.log(infoTripUser.getLocation)
-        var date = infoTripUser.getLastDate.getTime() - infoTripUser.getFirstDate.getTime();
-        date = Math.floor(date / (24 * 60 * 60 * 1000))
-        document.querySelector('.trip-location').innerHTML = 'Location: ' + `${infoTripUser.getLocation}`;
-        document.querySelector('.trip-date').innerHTML = 'Date in ' + `${date}` + ' days';
-        document.querySelector('.trip-passen').innerHTML = 'passengers: ' + `${infoTripUser.getPassen}`;
-        // var arrayInfo = infoTripUser.array();
-        // for (var i = 0; i < showInfo.length; i++) {
-        //     showInfo[i].value = arrayInfo[i];
         // }
+        // infoTripUser = new Trip(...infoRes)
+        // console.log(infoTripUser.call())
 
-        infoResult.style.display = "flex";
+        // console.log(infoTripUser.getLocation)
+        // var date = infoTripUser.getLastDate.getTime() - infoTripUser.getFirstDate.getTime();
+        // date = Math.floor(date / (24 * 60 * 60 * 1000))
+        // document.querySelector('.trip-location').innerHTML = 'Location: ' + `${infoTripUser.getLocation}`;
+        // document.querySelector('.trip-date').innerHTML = 'Date in ' + `${date}` + ' days';
+        // document.querySelector('.trip-passen').innerHTML = 'passengers: ' + `${infoTripUser.getPassen}`;
+        // // var arrayInfo = infoTripUser.array();
+        // // for (var i = 0; i < showInfo.length; i++) {
+        // //     showInfo[i].value = arrayInfo[i];
+        // // }
+
+        // infoResult.style.display = "flex";
     }
 })
 
+function createDate(formData,callback) {
+    let option = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+          },
+        body: JSON.stringify(formData)
+    }
+
+    fetch(courseApi,option)
+        .then(function(response){
+            return response.json();
+        })
+        .then(callback)
+}
+function hadleCreateTrip(){
+    var locations = document.querySelector('.text-location').value
+    
+    var firstDate = new Date(document.querySelector('.text-checkin').value).getTime()
+    
+    var lastDate = new Date(document.querySelector('.text-checkout').value).getTime()
+    var passen = document.querySelector('.text-travel').value
+    var date = lastDate - firstDate 
+    date = Math.floor(date / (24 * 60 * 60 * 1000))
+    
+    var formDataTrip ={
+        location:locations,
+        firstDate:firstDate,
+        lastDate:lastDate,
+        passenger:passen,
+        date:date
+    }
+    createDate(formDataTrip)
+    
+}
+function renderListTrip () {
+    fetch(courseApi)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(trip){
+        let htmls = trip.map(function(trips){
+        return `
+        <li><a class="dropdown-item" href="#" onclick="showInfoTrip(${trips.id})">Info Trip${trips.id} </a></li>
+        `})
+        document.querySelector('.dropdown-menu').innerHTML = htmls.join('')
+    })
+    
+}
+function showInfoTrip(tripId) {
+    document.querySelector('.info-trip').style.display="flex"
+    fetch(courseApi + `/${tripId}`)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(trips){
+        var tripInfoHtml = `
+        <h1 class="mb-4" style="font-family: Inter;font-size: 36px;font-style: normal;font-weight: 700;">Info Trip ${trips.id}
+        </h1>
+    <div class="col-12 mb-4">
+        <h1 for="validationDefault01" class="form-label trip-location">Location: ${trips.location}</h1>
+
+    </div>
+    <div class="col-6 mb-4">
+        <h1 for="validationDefault01" class="form-label trip-date">date in: ${trips.date} days </h1>
+    </div>
+    <div class="col-12">
+        <h1 for="validationDefault01" class="form-label trip-passen">passenger: ${trips.passenger}</h1>
+        `
+        document.querySelector('.info-trip').innerHTML = tripInfoHtml;
+    })
+}
 
 //----------------Check validation Form------------
 
