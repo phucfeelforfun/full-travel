@@ -85,26 +85,22 @@ btn.addEventListener('click', (e) => {
     
 
     if (checkLogin) {
-        hadleCreateTrip()
-        // for (var i = 0; i < check.length; i++) {
-        //     infoRes[i] = check[i].value;
-
-        // }
-        // infoTripUser = new Trip(...infoRes)
-        // console.log(infoTripUser.call())
-
-        // console.log(infoTripUser.getLocation)
-        // var date = infoTripUser.getLastDate.getTime() - infoTripUser.getFirstDate.getTime();
-        // date = Math.floor(date / (24 * 60 * 60 * 1000))
-        // document.querySelector('.trip-location').innerHTML = 'Location: ' + `${infoTripUser.getLocation}`;
-        // document.querySelector('.trip-date').innerHTML = 'Date in ' + `${date}` + ' days';
-        // document.querySelector('.trip-passen').innerHTML = 'passengers: ' + `${infoTripUser.getPassen}`;
-        // // var arrayInfo = infoTripUser.array();
-        // // for (var i = 0; i < showInfo.length; i++) {
-        // //     showInfo[i].value = arrayInfo[i];
-        // // }
-
-        // infoResult.style.display = "flex";
+        var promise = new Promise(
+            function(resolve, reject){
+                resolve()// thành công
+                reject()// thất bại
+            }    
+        )
+        promise
+        .then(function(){
+            hadleCreateTrip()
+        })
+        .then(function(){
+            check.forEach(checks=>{
+                checks.value="";
+            })
+        })
+       
     }
 })
 
