@@ -1,0 +1,59 @@
+body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:100px 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    padding-top: 100px;
+    background: url(/assets/images/thumb.png)no-repeat;
+    background-size: cover;
+    
+}
+.login {
+padding: 48px 40px;
+border-radius: 20px;
+border: 0.5px solid var(--gray-5, #E6E8EC);
+background: var(--white-white, #FFF);
+box-shadow: 0px 20px 60px -6px rgba(40, 40, 40, 0.08);
+}
+.form-control::-webkit-input-placeholder{
+    color: var(--gray-4, #B1B5C3);
+/* body/bodi 16 (regular) */
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 150% */
+}
+.btn-outline-secondary{
+    border: 1px solid var(--gray-5, #E6E8EC);
+    padding:10px 30px;
+
+}
+.btn-outline-secondary:hover{
+    background-color: #FFF;
+}
+.line-space div{
+    width: 105px;
+height: 1px;
+flex-shrink: 0;
+background: var(--gray-5, #E6E8EC);
+}
+.invalid  input{
+    border:1px solid #ff2d2d;
+    background-color: #fef0f0;
+}
+.invalid  select{
+    border:1px solid #ff2d2d;
+    background-color: #fef0f0;
+}
+.invalid span{
+    color: #ff2d2d;
+}
+.form-message{
+    
+    font-size: 13px;
+}

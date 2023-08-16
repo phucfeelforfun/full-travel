@@ -4,7 +4,7 @@ let login = document.querySelector('.login');
 var loginContent = document.querySelector('.login-content')
 var info = document.querySelector('.info')
 var btn = document.querySelector('.btn-inform')
-var check = info.querySelectorAll('input');;
+var check = info.querySelectorAll('input');
 var infoResult = document.querySelector('.info-trip'); infoResult.style.display = "none";
 var infoRes = [];
 var btnShow = document.querySelector('.btn-show')
@@ -100,6 +100,9 @@ btn.addEventListener('click', (e) => {
                 checks.value="";
             })
         })
+        .then(function(){
+            showSuccessToast();
+        })
        
     }
 })
@@ -147,7 +150,10 @@ function renderListTrip () {
     .then(function(trip){
         let htmls = trip.map(function(trips){
         return `
-        <li><a class="dropdown-item" href="#" onclick="showInfoTrip(${trips.id})">Info Trip${trips.id} </a></li>
+        <li>
+        
+        <a class="dropdown-item" href="#" onclick="showInfoTrip(${trips.id})">Info Trip ${trips.id} </a>
+        </li>
         `})
         document.querySelector('.dropdown-menu').innerHTML = htmls.join('')
     })
@@ -161,8 +167,15 @@ function showInfoTrip(tripId) {
     })
     .then(function(trips){
         var tripInfoHtml = `
-        <h1 class="mb-4" style="font-family: Inter;font-size: 36px;font-style: normal;font-weight: 700;">Info Trip ${trips.id}
-        </h1>
+        <div class="d-flex justify-content-between align ">
+        <h1 class="mb-4" style="font-family: Inter;font-size: 36px;font-style: normal;font-weight: 700;">Info Trip ${trips.id}</h1>
+        <div>
+        <i class="fa-solid fa-pen me pe-2 border-end border-2" onclick="showdangerToast()" style="color: #1257ce;"></i>
+        <i class="fa-solid fa-trash-can ps-2" style="color: #0856dd;"></i>
+        </div>
+        
+        </div>
+        
     <div class="col-12 mb-4">
         <h1 for="validationDefault01" class="form-label trip-location">Location: ${trips.location}</h1>
 
@@ -259,7 +272,65 @@ function showDate() {
         }
     }, 1000);
 }
-
-
+//--------toast message
+function toast({title='',message='',type='',duration=3000}){
+    let main = document.getElementById('toast-message');
+    
+    if (main){
+        
+        var toast = document.createElement('div')
+        toast.classList.add('toast-message',`toast-${type}`)
+        var icons ={
+            success:'fa-solid fa-circle-check',
+            error:'fa-solid fa-xmark',
+            danger:'fa-solid fa-xmark'
+        }
+        var delay = (duration/1000).toFixed(2);
+        toast.style.animation = `slideInLeft ease .3s, opac linear 1s ${delay}s forwards`;
+        var icon = icons[type]
+        toast.innerHTML=`
+        <div class="icon-toast">
+                <i class="${icon}"></i>
+            </div>
+            <div class="content-toast">
+                <h1>${title}</h1>
+                <p>${message}</p>
+            </div>
+            <div class="close-toast" >
+                <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+        `;
+        toast.onclick = function(e){
+            if(e.target.closest('.close-toast')){
+                main.removeChild(toast),
+                clearTimeout(removeToast)
+            }
+        }
+        main.appendChild(toast)
+        var removeToast = setTimeout(function(){
+            main.removeChild(toast)
+        },duration + 1000)
+    }
+}
+function showSuccessToast(){
+    toast(
+        {
+            title:'Sucess',
+            message:'I will done! oke',
+            type:'success',
+            duration:3000
+        }
+    )
+}
+function showdangerToast(){
+    toast(
+    {
+        title:'Sucess',
+        message:'I will done! oke',
+        type:'danger',
+        duration:3000
+    }
+)
+}
 
 
