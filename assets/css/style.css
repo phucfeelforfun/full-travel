@@ -1597,12 +1597,17 @@ a {
 .dropdown-menu {
     transition: all linear 0.05s;
 }
-.start-date::-webkit-input-placeholder{
-    color:#003bd2
-}
-/* input[type=date]:required:invalid::-webkit-datetime-edit {
+.start-date::-webkit-datetime-edit {
     color: transparent;
 }
-input[type=date]:focus::-webkit-datetime-edit {
-    color: black !important;
-} */
+.start-date::before {
+  content: "Start date";
+  color: gray;
+}
+.end-date::-webkit-datetime-edit {
+    color: transparent;
+}
+.end-date::before {
+  content: "End date";
+  color: gray;
+}
